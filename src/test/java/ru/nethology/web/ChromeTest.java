@@ -19,12 +19,12 @@ public class ChromeTest {
     private WebDriver driver;
 
     @BeforeAll
-    public static void setUpAll(){
+    public static void setUpAll() {
         WebDriverManager.chromedriver().setup();
     }
 
     @BeforeEach
-    public void setUp(){
+    public void setUp() {
         ChromeOptions options = new ChromeOptions();
 //        options.addArguments("--disable-dev-shm-usage");
 //        options.addArguments("--no-sandbox");
@@ -33,13 +33,13 @@ public class ChromeTest {
     }
 
     @AfterEach
-    public void tearDown(){
+    public void tearDown() {
         driver.quit();
         driver = null;
     }
 
     @Test
-    public void should(){
+    public void shouldFillInTheForm() {
         driver.get("http://localhost:9999/");
         List<WebElement> elementList = driver.findElements(By.className("input__control"));
         elementList.get(0).sendKeys("Вася");
@@ -48,7 +48,6 @@ public class ChromeTest {
         driver.findElement(By.className("button__text")).click();
         String text = driver.findElement(By.cssSelector("[data-test-id='order-success']")).getText();
         assertEquals("Ваша заявка успешно отправлена! Наш менеджер свяжется с вами в ближайшее время.", text.trim());
-
 
     }
 }
